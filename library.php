@@ -3,68 +3,54 @@
 
 class Books {
 
-public $title;
-public $author;
-public $year;
-public $isAvailable;
-    
+    public $title;
+    public $author;
+    public $year;
+    public $isAvailable;
 
-
-    public function __construct($title, $author, $year, $isAvailable){
+    public function __construct($title, $author, $year, $isAvailable) {
         $this->title = $title;
         $this->author = $author;
         $this->year = $year;
         $this->isAvailable = $isAvailable;
     }
 
-    public function borrowBook(){
-        if($this->isAvailable){
+    public function borrowBook() {
+        if ($this->isAvailable) {
             $this->isAvailable = false;
-            echo "You have borrowed the book: " . $this->title;
-            echo "<br>";
+            echo "You have borrowed the book: {$this->title}<br><br>";
         } else {
-            echo "The book: " . $this->title. " has been borrowed ";
-            echo "<br>";
-            
-        }
-
-
-        }
-
-    public function returnBook(){
-        if(!$this->isAvailable){
-            $this->isAvailable = true;
-            echo "The book title: {$this->title} has been returned <br>";
-            echo "<br>";
-        } else {
-            echo "The book title: {$this->title}  is now available <br>";
-            echo "<br>";
-        }
-        }
-
-    public function displaybookinfo(){
-        echo "Book Title: " . $this->title;
-        echo "Author: " .$this->author;
-        echo "Year: " . $this->year;
-        if($this->isAvailable){
-            echo "Status: this book is available";
-        }else {
-            echo "Status: this book is not available";
-        }
+            echo "The book '{$this->title}' has already been borrowed.<br><br>";
         }
     }
 
-    $sample1 = new Books("The Summer I turned pretty", "Jenny Han", 2009, true);
-    $sample2 = new Books("To all the boys I've loved before", "Jenny Han", 2014, false);
+    public function returnBook() {
+        if (!$this->isAvailable) {
+            $this->isAvailable = true;
+            echo "The book '{$this->title}' has been returned.<br><br>";
+        } else {
+            echo "The book '{$this->title}' is already available.<br><br>";
+        }
+    }
 
-    echo $sample1->displaybookinfo()."<br>";
-    echo $sample1->borrowBook()."<br>";
-    echo $sample1->returnBook()."<br>";
-    echo "<br>";
+    public function displayBookInfo() {
+        echo "Book Title: {$this->title}<br>";
+        echo "Author: {$this->author}<br>";
+        echo "Year: {$this->year}<br>";
+        echo "Status: " . ($this->isAvailable ? "Available" : "Not Available") . "<br><br>";
+    }
+}
 
-    echo $sample2->displaybookinfo()."<br>";
-    echo $sample2->borrowBook()."<br>";
-    echo $sample2->returnBook()."<br>";
+$sample1 = new Books("The Summer I Turned Pretty", "Jenny Han", 2009, true);
+$sample2 = new Books("To All the Boys I've Loved Before", "Jenny Han", 2014, false);
+
+$sample1->displayBookInfo();
+$sample1->borrowBook();
+$sample1->returnBook();
+
+$sample2->displayBookInfo();
+$sample2->borrowBook();
+$sample2->returnBook();
 
 ?>
 
@@ -78,4 +64,5 @@ public $isAvailable;
 <body>
     
 </body>
+
 </html>
